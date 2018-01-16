@@ -1,19 +1,21 @@
+// run() called when the page is loaded
 function run() {
     let rows = document.querySelector('input');
     let table = document.querySelector('table');
     rows.focus();
-    rows.addEventListener("keyup", function(event) {
+    rows.addEventListener('keyup', function(event) {
         if (event.defaultPrevented) {
             return; // do nothing if event already processed
-        } else if (event.key === "Enter") {
+        } else if (event.key === 'Enter') {
             table.innerHTML = '';
-            table.setAttribute("style", "display:none;");
+            table.setAttribute('style', 'display:none;');
             generateRows(rows.value);
-            rows.value = "";
+            rows.value = '';
         }
     });
 }
 
+// generateRows() takes the number of rows requested, generates them and displays them below
 function generateRows(rows) {
     let numbers = [];
     let table = document.querySelector('table');
@@ -22,9 +24,6 @@ function generateRows(rows) {
     }
     let shuffledNumbers = shuffleArray(numbers.slice(0));
     while (rows > 0) {
-        /*if ((shuffledNumbers.length / 6) < 1) {
-            shuffledNumbers = shuffleArray(numbers.slice(0));
-        }*/
         let row = [];
         for (i = 0; i < 6; i++) {
             if (shuffledNumbers.length === 0) {
@@ -42,12 +41,12 @@ function generateRows(rows) {
             newTR.appendChild(newTD);
         }
         table.appendChild(newTR);
-        //console.log(row);
         rows--;
     }
-    table.removeAttribute("style", "display:none;");
+    table.removeAttribute('style', 'display:none;');
 };
 
+// shuffleArray() randomises an ordered array of all available lotto numbers and returns it
 function shuffleArray(array) {
     let currentIndex = array.length, tempValue, randomIndex;
 
