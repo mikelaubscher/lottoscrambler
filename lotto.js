@@ -1,7 +1,19 @@
 // run() called when the page is loaded
 function run() {
-    let rows = document.querySelector('input');
+    let rows = document.querySelector('#rows');
     let table = document.querySelector('table');
+    let alg1 = document.querySelector('#alg-1');
+    let alg2 = document.querySelector('#alg-2');
+    let alg1Desc = document.querySelector('#alg-1-desc');
+    let alg2Desc = document.querySelector('#alg-2-desc');
+    alg1.addEventListener('click', function() {
+        alg1Desc.removeAttribute('style', 'display:none;');
+        alg2Desc.setAttribute('style', 'display:none;');
+    });
+    alg2.addEventListener('click', function() {
+        alg2Desc.removeAttribute('style', 'display:none;');
+        alg1Desc.setAttribute('style', 'display:none;');
+    });
     rows.focus();
     rows.addEventListener('keyup', function(event) {
         if (event.defaultPrevented) {
@@ -9,14 +21,14 @@ function run() {
         } else if (event.key === 'Enter') {
             table.innerHTML = '';
             table.setAttribute('style', 'display:none;');
-            generateRows(rows.value);
+            generateRows(rows.value, alg2);
             rows.value = '';
         }
     });
 }
 
 // generateRows() takes the number of rows requested, generates them and displays them below
-function generateRows(rows) {
+function generateRows(rows, alg2) {
     let numbers = [];
     let table = document.querySelector('table');
     for (i = 0; i < 52; i++) {
@@ -41,6 +53,9 @@ function generateRows(rows) {
             newTR.appendChild(newTD);
         }
         table.appendChild(newTR);
+        if (alg2.checked) {
+            shuffledNumbers = shuffleArray(numbers.slice(0));
+        }
         rows--;
     }
     table.removeAttribute('style', 'display:none;');

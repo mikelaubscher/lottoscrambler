@@ -8,8 +8,15 @@
 </head>
 <body>
     <h1>You gotta be in it to win it..</h1>
+    <p>Select algorithm:</p>
+    <form>
+        <input id="alg-1" type="radio" name="algorithm" checked>Algorithm 1 
+        <input id="alg-2" type="radio" name="algorithm">Algorithm 2<br>
+    </form>
+    <p id="alg-1-desc">Pool of available numbers will be depleted by each chosen row.</p>
+    <p id="alg-2-desc" style="display:none">Each row will be chosen from the full range of numbers.</p>
     <p>Enter number of rows:</p>
-    <input type="text">    
+    <input id="rows" type="text"><br>
     <table style="display:none"></table>
 <script src="lotto.js"></script>
 </body>
